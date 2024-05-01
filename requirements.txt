@@ -1,0 +1,7 @@
+#How to setup
+
+#install
+python -m pip install streamlit 
+
+#run
+streamlit run home.py
