@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import seaborn as sns
 import sistem_rekomendasi_modul
 
 st.header("Selamat datang di AI Rekomendasi Karir!")

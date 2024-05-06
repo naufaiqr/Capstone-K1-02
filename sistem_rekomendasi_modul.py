@@ -15,7 +15,7 @@ import plotly.graph_objects as go
 import openpyxl
 import json
 
-df = pd.read_excel('/content/dataset_user.xlsx')
+df = pd.read_excel('C:/Users/hallo/OneDrive/Documents/Kuliah/Capstone/Capstone-K1/Capstone-K1-main/dataset_user.xlsx')
 
 df.head(2)
 
@@ -116,7 +116,7 @@ df['Saran Pengembangan Diri 3'].unique()
 
 df['Saran Pengembangan Diri 4'].unique()
 
-file_path = '/content/stopwords-id.txt'
+file_path = 'C:/Users/hallo/OneDrive/Documents/Kuliah/Capstone/Capstone-K1/Capstone-K1-main/stopwords-id.txt'
 
 with open(file_path, 'r') as file:
     stop_words_id = file.read().split('\n')
@@ -152,10 +152,9 @@ df.info()
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import seaborn as sns
 import re
 
-item_df = pd.read_csv('/content/training_data_cleaned_translated.csv')
+item_df = pd.read_csv('C:/Users/hallo/OneDrive/Documents/Kuliah/Capstone/Capstone-K1/Capstone-K1-main/training_data_cleaned_translated.csv')
 #item_df.head()
 item_df.info()
 
