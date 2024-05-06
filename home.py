@@ -40,21 +40,22 @@ if submitted:
 # ini disini data nama dan data 1 - 10 dimasukin ke database dulu
 
 
-# mulai dari sini, sistem rekomendasinya berjalan
-df_new = pd.DataFrame(columns=['Pengelolaan informasi pembelajaran', 'Pengelolaan situasi yang dihadapi', 'Kreativitas dalam bersikap', 'Pola Komunikasi', 'Interaksi dengan lingkungan pembelajaran', 'Pengambilan Keputusan dan Kepemimpinan', 'Minat Karir dan Kesesuaian potensi bidang pekerjaan', 'Saran Pengembangan Diri 1', 'Saran Pengembangan Diri 2', 'Saran Pengembangan Diri 3', 'Saran Pengembangan Diri 4'])
+if submitted:
+    # mulai dari sini, sistem rekomendasinya berjalan
+    df_new = pd.DataFrame(columns=['Pengelolaan informasi pembelajaran', 'Pengelolaan situasi yang dihadapi', 'Kreativitas dalam bersikap', 'Pola Komunikasi', 'Interaksi dengan lingkungan pembelajaran', 'Pengambilan Keputusan dan Kepemimpinan', 'Minat Karir dan Kesesuaian potensi bidang pekerjaan', 'Saran Pengembangan Diri 1', 'Saran Pengembangan Diri 2', 'Saran Pengembangan Diri 3', 'Saran Pengembangan Diri 4'])
 
-item_df = pd.read_csv('/content/training_data_cleaned_translated.csv')
+    item_df = pd.read_csv('C:/Users/hallo/OneDrive/Documents/Kuliah/Capstone/Capstone-K1/Capstone-K1-main/training_data_cleaned_translated.csv')
 
-df_new.loc[len(df_new)] = [data1, data2, data3, data4, 
-                           data5, data6, data7, data8,
-                           data9, data10, data11]
+    df_new.loc[len(df_new)] = [data1, data2, data3, data4, 
+                            data5, data6, data7, data8,
+                            data9, data10, data11]
 
-df_cleaned_new = sistem_rekomendasi_modul.get_user_input(df_new)
-item_ranking_new, item_ranking_aggregated  = sistem_rekomendasi_modul.tfidf_new(df_cleaned_new, item_df)
-top_3_new, top_3_aggregated = sistem_rekomendasi_modul.result(item_ranking_new, item_ranking_aggregated, item_df)
+    df_cleaned_neww = sistem_rekomendasi_modul.get_user_input(df_new)
+    item_ranking_new, item_ranking_aggregated, item_df  = sistem_rekomendasi_modul.tfidf_new(df_cleaned_neww, item_df)
+    top_3_new, top_3_aggregated = sistem_rekomendasi_modul.result(item_ranking_new, item_ranking_aggregated, item_df)
 
-print("Rekomendasi top berdasarkan skor kesamaan pengguna baru:")
-print(top_3_new)
+    st.subheader("Rekomendasi top berdasarkan skor kesamaan pengguna baru:")
+    st.write(top_3_new)
 
-print("\nRekomendasi top berdasarkan agregasi skor kesamaan pengguna lain:")
-print(top_3_aggregated)
+    st.subheader("\nRekomendasi top berdasarkan agregasi skor kesamaan pengguna lain:")
+    st.write(top_3_aggregated)

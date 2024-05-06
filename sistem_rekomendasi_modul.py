@@ -128,6 +128,11 @@ def remove_stopwords(text):
     clean_words = [word for word in words if word not in stop_words_id]
     return ' '.join(clean_words)
 
+df['Interaksi dengan lingkungan pembelajaran'] = df['Interaksi dengan lingkungan pembelajaran'].apply(remove_stopwords)
+df['Pengelolaan informasi pembelajaran'] = df['Pengelolaan informasi pembelajaran'].apply(remove_stopwords)
+df['Pengelolaan situasi yang dihadapi'] = df['Pengelolaan situasi yang dihadapi'].apply(remove_stopwords)
+df['Pengambilan Keputusan dan Kepemimpinan '] = df['Pengambilan Keputusan dan Kepemimpinan '].apply(remove_stopwords)
+df['Minat Karir dan Kesesuaian potensi bidang pekerjaan'] = df['Minat Karir dan Kesesuaian potensi bidang pekerjaan'].apply(remove_stopwords)
 df['Kreativitas dalam bersikap'] = df['Kreativitas dalam bersikap'].apply(remove_stopwords)
 df['Pola Komunikasi'] = df['Pola Komunikasi'].apply(remove_stopwords)
 df['Saran Pengembangan Diri 1'] = df['Saran Pengembangan Diri 1'].apply(remove_stopwords)
@@ -173,7 +178,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 df['text_combined'] = df[['Pengelolaan informasi pembelajaran', 'Pengelolaan situasi yang dihadapi', 'Kreativitas dalam bersikap', 'Pola Komunikasi', 'Interaksi dengan lingkungan pembelajaran', 'Pengambilan Keputusan dan Kepemimpinan ','Minat Karir dan Kesesuaian potensi bidang pekerjaan', 'Saran Pengembangan Diri 1', 'Saran Pengembangan Diri 2', 'Saran Pengembangan Diri 3', 'Saran Pengembangan Diri 4']].apply(lambda row: ' '.join(row.values.astype(str)), axis=1)
 
 # Inisialisasi TfidfVectorizer dengan stop words Indonesia
-tfidf = TfidfVectorizer(stop_words=stop_words_id)
+tfidf = TfidfVectorizer()
 
 # Terapkan TF-IDF pada teks gabungan
 tfidf_matrix_user = tfidf.fit_transform(df['text_combined'])
@@ -248,6 +253,18 @@ Jika Anda sudah memiliki dua matriks TF-IDF yang berbeda, Anda bisa menggunakan 
 
 def user_preprocessing(df_new):
       # Pastikan semua kolom yang perlu diubah menjadi huruf kecil dan lakukan cleaning teks
+    file_path = 'C:/Users/hallo/OneDrive/Documents/Kuliah/Capstone/Capstone-K1/Capstone-K1-main/stopwords-id.txt'
+
+    with open(file_path, 'r') as file:
+      stop_words_id = file.read().split('\n')
+      stop_words_id = [word for word in stop_words_id if word]
+      print(stop_words_id[:10])
+
+    def remove_stopwords(text):
+      words = text.split()
+      clean_words = [word for word in words if word not in stop_words_id]
+      return ' '.join(clean_words)
+    
     columns_to_clean = ['Pengelolaan informasi pembelajaran', 'Pengelolaan situasi yang dihadapi',
                         'Kreativitas dalam bersikap', 'Pola Komunikasi', 'Interaksi dengan lingkungan pembelajaran',
                         'Pengambilan Keputusan dan Kepemimpinan', 'Minat Karir dan Kesesuaian potensi bidang pekerjaan',
@@ -256,7 +273,7 @@ def user_preprocessing(df_new):
 
     for column in columns_to_clean:
         df_new[column] = df_new[column].str.lower().str.replace("[^a-zA-Z\s]", "").str.replace("\s+", " ", regex=True).str.strip()
-
+        df_new[column] = df_new[column].apply(remove_stopwords)
     return df_new
 
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -268,7 +285,7 @@ def tfidf_new(df_cleaned_new, item_df):
   df_cleaned_new['text_combined'] = df_cleaned_new[['Pengelolaan informasi pembelajaran', 'Pengelolaan situasi yang dihadapi', 'Kreativitas dalam bersikap', 'Pola Komunikasi', 'Interaksi dengan lingkungan pembelajaran', 'Pengambilan Keputusan dan Kepemimpinan','Minat Karir dan Kesesuaian potensi bidang pekerjaan', 'Saran Pengembangan Diri 1', 'Saran Pengembangan Diri 2', 'Saran Pengembangan Diri 3', 'Saran Pengembangan Diri 4']].apply(lambda row: ' '.join(row.values.astype(str)), axis=1)
 
   # Inisialisasi TfidfVectorizer dengan stop words Indonesia
-  tfidf_model = TfidfVectorizer(stop_words=stop_words_id)
+  tfidf_model = TfidfVectorizer()
 
   # Terapkan TF-IDF pada teks gabungan
   tfidf_matrix_user_new = tfidf_model.fit_transform(df_cleaned_new['text_combined'])
