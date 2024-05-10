@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import sistem_rekomendasi_modul
+from gsheetsdb import connect
 from streamlit_gsheets import GSheetsConnection
 
 db = st.connection("gsheets", type=GSheetsConnection)
