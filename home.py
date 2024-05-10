@@ -3,7 +3,9 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import sistem_rekomendasi_modul
+from streamlit_gsheets import GSheetsConnection
 
+db = st.connection("gsheets", type=GSheetsConnection)
 st.header("Selamat datang di Rekomendasi Karir IT!")
 st.write("Masukkan input, nanti kami akan merekomendasikan jalur karir yang cocok denganmu!")
 
