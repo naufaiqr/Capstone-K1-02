@@ -44,7 +44,7 @@ if submitted:
     # mulai dari sini, sistem rekomendasinya berjalan
     df_new = pd.DataFrame(columns=['Pengelolaan informasi pembelajaran', 'Pengelolaan situasi yang dihadapi', 'Kreativitas dalam bersikap', 'Pola Komunikasi', 'Interaksi dengan lingkungan pembelajaran', 'Pengambilan Keputusan dan Kepemimpinan', 'Minat Karir dan Kesesuaian potensi bidang pekerjaan', 'Saran Pengembangan Diri 1', 'Saran Pengembangan Diri 2', 'Saran Pengembangan Diri 3', 'Saran Pengembangan Diri 4'])
 
-    item_df = pd.read_csv('C:/Users/hallo/OneDrive/Documents/Kuliah/Capstone/Capstone-K1/Capstone-K1-main/training_data_cleaned_translated.csv')
+    item_df = pd.read_csv('training_data_cleaned_translated.csv')
 
     df_new.loc[len(df_new)] = [data1, data2, data3, data4, 
                             data5, data6, data7, data8,
