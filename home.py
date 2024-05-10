@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import sistem_rekomendasi_modul
 
-st.header("Selamat datang di AI Rekomendasi Karir!")
+st.header("Selamat datang di Rekomendasi Karir IT!")
 st.write("Masukkan input, nanti kami akan merekomendasikan jalur karir yang cocok denganmu!")
 
 with st.form(key='my_form'):
