@@ -1,7 +1,7 @@
 #How to setup
 
 #install
-streamlit >=1.28
+streamlit >= 1.28
 pandas
 matplotlib == 3.8.4
 scikit-learn == 1.4.2
