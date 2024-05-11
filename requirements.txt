@@ -1,12 +1,11 @@
 #How to setup
 
 #install
-streamlit == 1.34.0
-pandas == 2.2.2
+streamlit >=1.28
+pandas
 matplotlib == 3.8.4
 scikit-learn == 1.4.2
 plotly == 5.22.0
 numpy == 1.26.4
 openpyxl == 3.1.2
 st-gsheets-connection
-gsheetsdb==0.1.13.1
