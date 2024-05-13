@@ -87,4 +87,4 @@ with st.form(key='my_form'):
         # Update database
         update_dt = pd.concat([dt, input_dt], ignore_index=True)
         conn.update(data=update_dt)
-        st.success("Submitted!")
+        st.success("Terima kasih sudah berpartisipasi! Semoga anda senang dengan hasil rekomendasinya.")
