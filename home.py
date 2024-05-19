@@ -27,21 +27,6 @@ with st.form(key='my_form'):
     data11 = st.text_input("Masukkan saran pengembangan diri 4: ")
     submitted = st.form_submit_button(label="Submit")
 
-    if submitted:
-        # Lakukan tindakan sesuai dengan apa yang Anda inginkan saat tombol "Submit" ditekan
-        st.write("Nama: ", nama)
-        st.write("Pengolalaan Informasi Pemebelajaran: ", data1)
-        st.write("Pengelolaan situasi yang dihadapi: ", data2)
-        st.write("Kreativitas dalam bersikap: ", data3)
-        st.write("Pola Komunikasi: ", data4)
-        st.write("Interaksi dengan lingkungan pembelajaran: ", data5)
-        st.write("Pemngambilan Keputusan dan Kepemimpinan: ", data6)
-        st.write("Minat Karir dan Kesesuaian potensi bidang pekerjaan: ", data7)
-        st.write("Saran pengembangan diri 1: ", data8)
-        st.write("Saran pengembangan diri 2: ", data9)
-        st.write("Saran pengembangan diri 3: ", data10)
-        st.write("Saran pengembangan diri 4: ", data11)
-
     # ini disini data nama dan data 1 - 10 dimasukin ke database dulu
 
     if submitted:
@@ -57,6 +42,10 @@ with st.form(key='my_form'):
         df_cleaned_new = sistem_rekomendasi_modul.get_user_input(df_new)
         item_ranking_new, item_ranking_aggregated, item_df  = sistem_rekomendasi_modul.tfidf_new(df_cleaned_new, item_df)
         top_3_new, top_3_aggregated = sistem_rekomendasi_modul.result(item_ranking_new, item_ranking_aggregated, item_df)
+
+        # Membuat dataframe dengan index 1, 2, 3 untuk rekomendasi
+        top_3_new_df = pd.DataFrame(top_3_new, index=[1, 2, 3], columns=['Top Rekomendasi (Pengguna Baru)'])
+        top_3_aggregated_df = pd.DataFrame(top_3_aggregated, index=[1, 2, 3], columns=['Top Rekomendasi (Agregasi Pengguna Lain)'])
 
         st.subheader("Rekomendasi top berdasarkan skor kesamaan pengguna baru:")
         st.write(top_3_new)
