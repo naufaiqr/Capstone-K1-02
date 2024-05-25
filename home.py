@@ -44,14 +44,17 @@ with st.form(key='my_form'):
         top_3_new, top_3_aggregated = sistem_rekomendasi_modul.result(item_ranking_new, item_ranking_aggregated, item_df)
 
         # Membuat dataframe dengan index 1, 2, 3 untuk rekomendasi
-        top_3_new_df = pd.DataFrame(top_3_new, index=[1, 2, 3], columns=['Top Rekomendasi (Pengguna Baru)'])
-        top_3_aggregated_df = pd.DataFrame(top_3_aggregated, index=[1, 2, 3], columns=['Top Rekomendasi (Agregasi Pengguna Lain)'])
+        top_3_new_df = pd.DataFrame(top_3_new, columns=['Top Rekomendasi (Pengguna Baru)'])
+        top_3_new_df.index = range(1, len(top_3_new_df) + 1)
+
+        top_3_aggregated_df = pd.DataFrame(top_3_aggregated, columns=['Top Rekomendasi (Agregasi Pengguna Lain)'])
+        top_3_aggregated_df.index = range(1, len(top_3_aggregated_df) + 1)
 
         st.subheader("Rekomendasi top berdasarkan skor kesamaan pengguna baru:")
-        st.write(top_3_new)
+        st.write(top_3_new_df)
 
         st.subheader("\nRekomendasi top berdasarkan agregasi skor kesamaan pengguna lain:")
-        st.write(top_3_aggregated)
+        st.write(top_3_aggregated_df)
 
         top_3_new_joined = ', '.join(top_3_new)
         top_3_aggregated_joined = ', '.join(top_3_aggregated)
