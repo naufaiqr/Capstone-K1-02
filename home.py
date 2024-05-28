@@ -44,7 +44,7 @@ with st.form(key='my_form'):
 
        # Membuat dataframe dengan index 1, 2, 3 untuk rekomendasi
 
-       top_3_df_new = top_3_new.set_index('Urutan')
+       top_3_df_new = top_3_new
        top_3_df_aggregated = top_3_aggregated.set_index('Urutan')
 
 # Menampilkan DataFrame tanpa indeks default menggunakan Streamlit
