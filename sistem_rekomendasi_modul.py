@@ -319,14 +319,16 @@ def result(item_ranking_new, item_ranking_aggregated, item_df):
   global top_3_items_new
   top_3_items_indices = item_ranking_new[0, :3]  # Get top 3 items for the first user
   top_3_items_new = item_df['position_title'].iloc[top_3_items_indices]
+  top_3_items_new_desc = item_df['Deskripsi'].iloc[top_3_items_indices]
 
   global top_3_items_aggregated
   top_3_items_indices_aggregated = item_ranking_aggregated[0, :3]
   top_3_items_aggregated = item_df['position_title'].iloc[top_3_items_indices_aggregated]
+  top_3_items_agg_desc = item_df['Deskripsi'].iloc[top_3_items_indices_aggregated]
 
   # Membuat DataFrame untuk menyimpan rekomendasi top 3 beserta label urutan
-  top_3_df_new = pd.DataFrame({'Urutan': ['1', '2', '3'], 'Top Rekomendasi (Pengguna Baru)': top_3_items_new.values})
-  top_3_df_aggregated = pd.DataFrame({'Urutan': ['1', '2', '3'], 'Top Rekomendasi (Agregasi Pengguna Lain)': top_3_items_aggregated.values})
+  top_3_df_new = pd.DataFrame({'Urutan': ['1', '2', '3'], 'Top Rekomendasi (Pengguna Baru)': top_3_items_new.values, 'Deskripsi': top_3_items_new_desc})
+  top_3_df_aggregated = pd.DataFrame({'Urutan': ['1', '2', '3'], 'Top Rekomendasi (Agregasi Pengguna Lain)': top_3_items_aggregated.values, 'Deskripsi': top_3_items_agg_desc})
   
   return top_3_df_new, top_3_df_aggregated
 
