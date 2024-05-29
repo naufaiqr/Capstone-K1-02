@@ -243,8 +243,6 @@ print(user_similarity_scores)
 
 """# -------------------------------------------------------------------------------------------------------
 
-# Collaborative Filtering
-
 ## Data Input User
 
 Menyesuaikan Matriks Setelah Perhitungan:
@@ -302,35 +300,28 @@ def tfidf_new(df_cleaned_new, item_df):
   global cos_sim_new
   cos_sim_new = cosine_similarity(tfidf_matrix_user_new, tfidf_matrix_item_new)
 
-  # Mendapatkan ranking item berdasarkan skor kesamaan
-  item_ranking_new = np.argsort(cos_sim_new, axis=1)[:, ::-1]
-
   # Mengagregasi rekomendasi berdasarkan skor kesamaan dari pengguna lain
-  aggregated_recommendations = np.zeros_like(cos_sim_new)
-  for i in range(len(cos_sim)):
-    aggregated_recommendations += cos_sim[i] * cos_sim_new
+  global aggregated_recommendations
+  # Menghitung rata-rata dari `cos_sim`
+  cos_sim_mean = np.mean(cos_sim, axis=0)
+
+  # Menggabungkan rata-rata `cos_sim` dengan `cos_sim_new` dan menghitung rata-rata akhir
+  aggregated_recommendations = (cos_sim_mean + cos_sim_new) / 2
 
   # Pilih rekomendasi top berdasarkan agregasi skor kesamaan
   item_ranking_aggregated = np.argsort(aggregated_recommendations, axis=1)[:, ::-1]
-  return item_ranking_new, item_ranking_aggregated, item_df
+  return item_ranking_aggregated, item_df
 
-def result(item_ranking_new, item_ranking_aggregated, item_df):
-  # Menampilkan rekomendasi top 3
-  global top_3_items_new
-  top_3_items_indices = item_ranking_new[0, :3]  # Get top 3 items for the first user
-  top_3_items_new = item_df['position_title'].iloc[top_3_items_indices]
-  top_3_items_new_desc = item_df['Deskripsi'].iloc[top_3_items_indices]
-
+def result(item_ranking_aggregated, item_df):
   global top_3_items_aggregated
   top_3_items_indices_aggregated = item_ranking_aggregated[0, :3]
   top_3_items_aggregated = item_df['position_title'].iloc[top_3_items_indices_aggregated]
   top_3_items_agg_desc = item_df['Deskripsi'].iloc[top_3_items_indices_aggregated]
 
   # Membuat DataFrame untuk menyimpan rekomendasi top 3 beserta label urutan
-  top_3_df_new = pd.DataFrame({'Urutan': ['1', '2', '3'], 'Top Rekomendasi (Pengguna Baru)': top_3_items_new.values, 'Deskripsi': top_3_items_new_desc})
   top_3_df_aggregated = pd.DataFrame({'Urutan': ['1', '2', '3'], 'Top Rekomendasi (Agregasi Pengguna Lain)': top_3_items_aggregated.values, 'Deskripsi': top_3_items_agg_desc})
   
-  return top_3_df_new, top_3_df_aggregated
+  return top_3_df_aggregated
 
 def get_user_input(df_new):
 
