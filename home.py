@@ -39,12 +39,10 @@ with st.form(key='my_form'):
                                 data9, data10, data11]
 
        df_cleaned_new = sistem_rekomendasi_modul.get_user_input(df_new)
-       item_ranking_new, item_ranking_aggregated, item_df  = sistem_rekomendasi_modul.tfidf_new(df_cleaned_new, item_df)
-       top_3_new, top_3_aggregated = sistem_rekomendasi_modul.result(item_ranking_new, item_ranking_aggregated, item_df)
+       item_ranking_aggregated, item_df  = sistem_rekomendasi_modul.tfidf_new(df_cleaned_new, item_df)
+       top_3_aggregated = sistem_rekomendasi_modul.result(item_ranking_aggregated, item_df)
 
        # Membuat dataframe dengan index 1, 2, 3 untuk rekomendasi
-
-       top_3_df_new = top_3_new
        top_3_df_aggregated = top_3_aggregated.set_index('Urutan')
 
 # Menampilkan DataFrame tanpa indeks default menggunakan Streamlit
@@ -53,7 +51,6 @@ with st.form(key='my_form'):
        st.subheader("\nRekomendasi top berdasarkan agregasi skor kesamaan pengguna lain:")
        st.table(top_3_df_aggregated)
 
-       top_3_new_joined = ', '.join(top_3_new)
        top_3_aggregated_joined = ', '.join(top_3_aggregated)
 
        input_dt = pd.DataFrame([{
