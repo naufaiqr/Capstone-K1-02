@@ -66,7 +66,6 @@ with st.form(key='my_form'):
            "saranPengembanganDiri_2": data9,
            "saranPengembanganDiri_3": data10,
            "saranPengembanganDiri_4": data11,
-           "top3new": top_3_new_joined,
            "top3aggregated": top_3_aggregated_joined
        }])
         
